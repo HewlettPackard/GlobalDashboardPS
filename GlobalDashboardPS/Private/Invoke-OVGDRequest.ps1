@@ -33,14 +33,14 @@ function Invoke-OVGDRequest {
         $URIBuilder = New-Object System.UriBuilder -ArgumentList @($Protocol, $System, $Port, $Path)
         $Uribuilder.Query = $query
         Write-Verbose "qry: $($uribuilder.query)"
-        
-        $headers = @{} 
+
+        $headers = @{}
         $headers["X-Api-Version"] = 2
 
         if($SessionKey){
             $headers["Auth"] = $sessionkey
         }
-        
+
         Write-Verbose "URI: $($uribuilder.uri)"
         $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType "application/json" -ErrorVariable apiErr -Verbose
 
