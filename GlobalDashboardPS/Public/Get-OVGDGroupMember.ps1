@@ -7,18 +7,17 @@ function Get-OVGDGroupMember {
         $Entity#,
         #$Count = 25
     )
-    
+
     begin {
         $ResourceType = "groups"
     }
-    
+
     process {
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
-        
-        Invoke-OVGDRequest -Resource ($Resource + "/members")
 
+        Invoke-OVGDRequest -Resource ($Resource + "/members")
     }
-    
+
     end {
     }
 }

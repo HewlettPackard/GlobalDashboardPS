@@ -6,17 +6,17 @@ function Get-OVGDServerHardware {
         $Entity,
         $Count = 25
     )
-    
+
     begin {
         $ResourceType = "server-hardware"
     }
-    
+
     process {
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         $Query = "count=$Count"
         Invoke-OVGDRequest -Resource $Resource -Query $Query -Verbose
     }
-    
+
     end {
     }
 }

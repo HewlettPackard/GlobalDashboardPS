@@ -1,21 +1,27 @@
 function Remove-OVGDGroup {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         $Server = $Global:OVGDPSServer,
         [parameter(Mandatory=$true)]
         $Group
     )
-    
+
     begin {
         $ResourceType = "groups"
     }
-    
+
     process {
         $Resource = BuildPath -Resource $ResourceType -Entity $Group
         Write-Verbose $resource
-        Invoke-OVGDRequest -Method DELETE -Resource $resource -Verbose
+
+        if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
+            Write-Output "This will delete the group $Group on server $server"
+        }
+        else {
+            Invoke-OVGDRequest -Method DELETE -Resource $resource -Verbose
+        }
     }
-    
+
     end {
     }
 }

@@ -6,17 +6,17 @@ function Get-OVGDGroup {
         $Entity,
         $Count = 25
     )
-    
+
     begin {
         $ResourceType = "groups"
     }
-    
+
     process {
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         Invoke-OVGDRequest -Resource $Resource
 
     }
-    
+
     end {
     }
 }

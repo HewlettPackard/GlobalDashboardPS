@@ -1,4 +1,5 @@
 function Connect-OVGD {
+    [cmdletbinding()]
     param (
         $Server,
         $UserName,
@@ -13,9 +14,7 @@ function Connect-OVGD {
         }
     }
     PROCESS {
-        
         New-OVGDSessionKey -Server $Server -Username $Username -Password $Password -LoginDomain $Directory -IgnoreSSL -Verbose
-        
     }
     END {
 

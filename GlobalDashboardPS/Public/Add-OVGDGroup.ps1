@@ -1,17 +1,17 @@
 function Add-OVGDGroup {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         $Server = $Global:OVGDPSServer,
         [parameter(Mandatory=$true)]
-        $GroupName,        
+        $GroupName,
         $Parent
     )
-    
+
     begin {
         $ResourceType = "groups"
         $Method = "POST"
     }
-    
+
     process {
 
         $body = @{
@@ -19,10 +19,15 @@ function Add-OVGDGroup {
             "parentUri" = $Parent
         } | ConvertTo-Json
 
-        Invoke-OVGDRequest -Resource $ResourceType -Method $Method -Body $body
+        if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
+            Write-Output "This will create the logical group $group on server $server"
+        }
+        else {
+            Invoke-OVGDRequest -Resource $ResourceType -Method $Method -Body $body
+        }
 
     }
-    
+
     end {
     }
 }

@@ -1,5 +1,5 @@
 function New-OVGDSessionKey{
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
         param(
             [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
             $Server,
@@ -10,14 +10,8 @@ function New-OVGDSessionKey{
             $Password,
             [Parameter(Mandatory=$false, ValueFromPipeline=$false)]
             #[ValidateSet("your-domain-here","local")]
-            $LoginDomain,
-            [switch]
-            $IgnoreSSL
+            $LoginDomain
         )
-    
-    if($IgnoreSSL){
-     Set-InsecureSSL
-    }
 
     $unsecPass = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
 
@@ -26,12 +20,16 @@ function New-OVGDSessionKey{
         userName = $UserName
         password = $unsecPass
     } | ConvertTo-Json
-    #Write-Verbose $body
-    $response = Invoke-OVGDRequest -Method Post -System $Server -Resource login-sessions -Body $body -Verbose
-    
+
+    if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
+        Write-Output "This will create a new session key on server $server"
+    }
+    else {
+        $response = Invoke-OVGDRequest -Method Post -System $Server -Resource login-sessions -Body $body -Verbose
+    }
+
     $sessionkey = $response.token
-    
+
     $global:OVGDPSServer = $server
     $global:OVGDPSToken = $sessionkey
-    
 }

@@ -3,15 +3,15 @@ function Get-OVGDCertificate {
     param (
         $Server = $Global:OVGDPSServer
     )
-    
+
     begin {
         $Resource = "certificates/https/remote/$Server"
     }
-    
+
     process {
-        Invoke-OVGDRequest -Resource $Resource 
+        Invoke-OVGDRequest -Resource $Resource
     }
-    
+
     end {
     }
 }

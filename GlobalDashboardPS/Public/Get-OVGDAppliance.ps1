@@ -21,5 +21,5 @@ function Get-OVGDAppliance {
     END {
 
     }
-    
+
 }
