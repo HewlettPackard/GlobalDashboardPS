@@ -1,5 +1,5 @@
 
-function BuildResourcePath {
+function BuildPath {
     [CmdletBinding()]
     param (
         $Resource,
@@ -44,7 +44,7 @@ function Invoke-OVGDRequest {
         $Protocol = "https",
         $Port = 443,
         $System = $Global:OVGDPSServer,
-        $Path,
+        #$Path,
         $Resource,
         $Body,
         $Query,
@@ -118,8 +118,6 @@ function New-OVGDSessionKey{
      Set-InsecureSSL
     }
 
-    $global:OVGDPSServer = $server
-    
     $unsecPass = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password))
 
     $body = [PSCustomObject]@{
@@ -131,8 +129,9 @@ function New-OVGDSessionKey{
     $response = Invoke-OVGDRequest -Method Post -System $Server -Resource login-sessions -Body $body -Verbose
     
     $sessionkey = $response.token
-    $global:OVGDPSToken = $sessionkey
     
+    $global:OVGDPSServer = $server
+    $global:OVGDPSToken = $sessionkey
     
 }
 
@@ -220,7 +219,7 @@ function Get-OVGDAppliance {
 
     }
     PROCESS {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
 
         Invoke-OVGDRequest -Resource $Resource
     }
@@ -313,7 +312,7 @@ function Get-OVGDConvergedSystem {
     
     process {
         
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
 
         Invoke-OVGDRequest -Resource $Resource
 
@@ -338,7 +337,7 @@ function Get-OVGDEnclosure {
     
     process {
 
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         Invoke-OVGDRequest -Resource $Resource
 
     }
@@ -361,7 +360,7 @@ function Get-OVGDGroup {
     }
     
     process {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         Invoke-OVGDRequest -Resource $Resource
 
     }
@@ -414,7 +413,7 @@ function Add-OVGDGroup {
 #     }
     
 #     process {
-#         $Resource = BuildResourcePath -Resource $ResourceType -Entity $Group
+#         $Resource = BuildPath -Resource $ResourceType -Entity $Group
 #         $ExistGroup = Get-OVGDGroup -Server $Server -Group $Group
 #     }
     
@@ -437,7 +436,7 @@ function Get-OVGDGroupMember {
     }
     
     process {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         
         Invoke-OVGDRequest -Resource ($Resource + "/members")
 
@@ -498,7 +497,7 @@ function Remove-OVGDGroup {
     }
     
     process {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Group
+        $Resource = BuildPath -Resource $ResourceType -Entity $Group
         Write-Verbose $resource
         Invoke-OVGDRequest -Method DELETE -Resource $resource -Verbose
     }
@@ -521,7 +520,7 @@ function Get-OVGDServerHardware {
     }
     
     process {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         $Query = "count=$Count"
         Invoke-OVGDRequest -Resource $Resource -Query $Query
     }
@@ -544,7 +543,7 @@ function Get-OVGDServerProfile {
     }
     
     process {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         $Query = "count=$Count"
         Invoke-OVGDRequest -Resource $Resource -Query $Query
     }
@@ -567,7 +566,7 @@ function Get-OVGDServerProfileTemplate {
     }
     
     process {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         $Query = "count=$Count"
         Invoke-OVGDRequest -Resource $Resource -Query $Query -Verbose
     }
@@ -590,7 +589,7 @@ function Get-OVGDStorageSystem {
     }
     
     process {
-        $Resource = BuildResourcePath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         $Query = "count=$Count"
         Invoke-OVGDRequest -Resource $Resource -Query $Query
     }
