@@ -1,4 +1,7 @@
 function Set-InsecureSSL {
+    [cmdletbinding(SupportsShouldProcess)]
+    param()
+    
 add-type @"
     using System.Net;
     using System.Security.Cryptography.X509Certificates;
