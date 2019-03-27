@@ -38,6 +38,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Output format
 
+## [version 0.2.1] - 2019-03-27
+
+## Changed
+
+- Fixed some syntax based on PSScriptAnalyzer tests
+- Added ShouldProcess support on functions
+
 ## [version 0.2.0] - 2019-03-27
 
 ### Added
