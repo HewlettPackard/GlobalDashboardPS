@@ -40,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [version 0.2.1] - 2019-03-27
 
-## Changed
+### Changed
 
 - Fixed some syntax based on PSScriptAnalyzer tests
 - Added ShouldProcess support on functions
