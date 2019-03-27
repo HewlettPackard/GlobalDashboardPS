@@ -15,11 +15,11 @@ function Remove-OVGDGroup {
         Write-Verbose $resource
 
         if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
-            Write-Output "This will delete the group $Group on server $server"
-        }
-        else {
             Invoke-OVGDRequest -Method DELETE -Resource $resource -Verbose
         }
+        # else {
+        #     Write-Output "This will delete the group $Group on server $server"
+        # }
     }
 
     end {

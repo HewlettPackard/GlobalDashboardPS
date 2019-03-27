@@ -22,11 +22,11 @@ function New-OVGDSessionKey{
     } | ConvertTo-Json
 
     if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
-        Write-Output "This will create a new session key on server $server"
+        $response = Invoke-OVGDRequest -Method Post -System $Server -Resource login-sessions -Body $body
     }
-    else {
-        $response = Invoke-OVGDRequest -Method Post -System $Server -Resource login-sessions -Body $body -Verbose
-    }
+    # else {
+    #     Write-Output "This will create a new session key on server $server"
+    # }
 
     $sessionkey = $response.token
 

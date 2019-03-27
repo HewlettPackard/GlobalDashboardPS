@@ -20,11 +20,11 @@ function Add-OVGDGroup {
         } | ConvertTo-Json
 
         if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
-            Write-Output "This will create the logical group $group on server $server"
-        }
-        else {
             Invoke-OVGDRequest -Resource $ResourceType -Method $Method -Body $body
         }
+        # else {
+        #     Write-Output "This will create the logical group $group on server $server"
+        # }
 
     }
 

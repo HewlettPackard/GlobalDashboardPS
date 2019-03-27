@@ -15,12 +15,11 @@ add-type @"
 "@
 
     if($PSCmdlet.ShouldProcess("ShouldProcess?")){
-
-    }
-    else {
         [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
         $AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
         [System.Net.ServicePointManager]::SecurityProtocol = $AllProtocols
     }
+    # else {
+    # }
 
 }

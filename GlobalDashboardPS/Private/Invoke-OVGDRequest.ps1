@@ -42,7 +42,7 @@ function Invoke-OVGDRequest {
         }
 
         Write-Verbose "URI: $($uribuilder.uri)"
-        $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType "application/json" -ErrorVariable apiErr -Verbose
+        $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType "application/json" -ErrorVariable apiErr
 
     }
     END {

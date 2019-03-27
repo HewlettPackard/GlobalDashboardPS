@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support paging
 - Support queries
 - CI pipeline
+- Support PSCredential
 
 ### Changed
 
