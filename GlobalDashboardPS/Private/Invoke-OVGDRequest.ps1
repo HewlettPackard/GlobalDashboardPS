@@ -41,7 +41,7 @@ function Invoke-OVGDRequest {
             $headers["Auth"] = $sessionkey
         }
 
-        Write-Verbose "URI: $($uribuilder.uri)"
+        Write-Verbose "$Method URI: $($uribuilder.uri)"
         $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType "application/json" -ErrorVariable apiErr
 
     }

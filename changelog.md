@@ -20,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for listing SAN Managers
 - Function for listing Resource Alerts
 - Function for listing Managed SANs
-- Function for Adding an appliance
 - Function for Updating an appliance
 - Function for Removing an appliance
 - Function for returning the sso url of an appliance
@@ -38,6 +37,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Output format
+
+## [version 0.2.2] - 2019-03-27
+
+### Added
+
+- Function for Adding an appliance
 
 ## [version 0.2.1] - 2019-03-27
 
