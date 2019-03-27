@@ -1,7 +1,7 @@
 function Set-InsecureSSL {
     [cmdletbinding(SupportsShouldProcess)]
     param()
-    
+
 add-type @"
     using System.Net;
     using System.Security.Cryptography.X509Certificates;
@@ -13,7 +13,14 @@ add-type @"
         }
     }
 "@
-    [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
-    $AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
-    [System.Net.ServicePointManager]::SecurityProtocol = $AllProtocols
+
+    if($PSCmdlet.ShouldProcess("ShouldProcess?")){
+
+    }
+    else {
+        [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
+        $AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
+        [System.Net.ServicePointManager]::SecurityProtocol = $AllProtocols
+    }
+
 }
