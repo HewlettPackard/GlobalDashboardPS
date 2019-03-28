@@ -1,6 +1,6 @@
-# HPE Global Dashboard Powershell module
+# HPE OneView Global Dashboard Powershell module
 
-This is a work in progress repo for creating a PS module for working with the HPE Global Dashboard REST API
+This is a work in progress repo for creating a PS module for working with the HPE OneView Global Dashboard REST API
 
 For now the following functions are available. Please note that the output is more or less the raw output from the API:
 
@@ -9,6 +9,7 @@ For now the following functions are available. Please note that the output is mo
 - Disconnect-OVGD
 - Remove-OVGDSessionKey
 - Get-OVGDAppliance
+- Add-OVGDAppliance
 - Get-OVGDCertificate
 - Get-OVGDConvergedSystem
 - Get-OVGDEnclosure
