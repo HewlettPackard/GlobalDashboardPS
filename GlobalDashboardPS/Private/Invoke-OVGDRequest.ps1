@@ -11,6 +11,7 @@ function Invoke-OVGDRequest {
         # [ValidateRange("GET","POST","DELETE")]
         $Method = "GET",
         $SessionKey = $global:OVGDPSToken,
+        $ContentType = "application/json",
         [switch]
         $IgnoreSSL = $true
     )
@@ -42,7 +43,7 @@ function Invoke-OVGDRequest {
         }
 
         Write-Verbose "$Method URI: $($uribuilder.uri)"
-        $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType "application/json" -ErrorVariable apiErr
+        $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType $ContentType -ErrorVariable apiErr
 
     }
     END {
