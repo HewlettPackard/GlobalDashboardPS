@@ -37,6 +37,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Output format
 
+## [version 0.3.0] - 2019-03-28
+
+### Changed
+
+- Renamed the module manifest file to the correct name
+
 ## [version 0.2.3] - 2019-03-28
 
 ### Added
