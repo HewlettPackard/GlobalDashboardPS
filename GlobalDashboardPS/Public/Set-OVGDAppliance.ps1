@@ -47,16 +47,16 @@ function Set-OVGDAppliance {
             $value = $NewName
             $opPath = "/applianceName"
         }
-        
+
         $abody = [PSCustomObject]@{
             op = $operation
             path = $opPath
             value = $value
         } #| ConvertTo-Json
-        
+
         $body = ConvertTo-Json @($abody)
         Write-Verbose $body
-        
+
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
 
         if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {

@@ -17,9 +17,6 @@ function Remove-OVGDSessionKey {
         if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
             Invoke-OVGDRequest -Method DELETE -System $Server -Resource login-sessions
         }
-        # else {
-        #     Write-Output "This will delete the session key $sessionkey on server $server"
-        # }
 
         $local:OVGDPSToken = $null
         $local:OVGDPSServer = $null

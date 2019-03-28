@@ -13,7 +13,7 @@ function Remove-OVGDAppliance {
 
     }
     PROCESS {
-        
+
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
 
         if ($PSCmdlet.ShouldProcess("ShouldProcess?")) {
