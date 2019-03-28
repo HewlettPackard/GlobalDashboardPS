@@ -10,6 +10,8 @@ For now the following functions are available. Please note that the output is mo
 - Remove-OVGDSessionKey
 - Get-OVGDAppliance
 - Add-OVGDAppliance
+- Set-OVGDAppliance (note! the Refresh option does not work at this point)
+- Remove-OVGDAppliance
 - Get-OVGDCertificate
 - Get-OVGDConvergedSystem
 - Get-OVGDEnclosure

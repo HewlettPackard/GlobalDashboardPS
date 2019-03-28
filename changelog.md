@@ -20,8 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for listing SAN Managers
 - Function for listing Resource Alerts
 - Function for listing Managed SANs
-- Function for Updating an appliance
-- Function for Removing an appliance
 - Function for returning the sso url of an appliance
 - Function for returning the sso url of a server hardware
 - Function for returning the sso url of an enclosure
@@ -38,6 +36,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Output format
+
+## [version 0.2.3] - 2019-03-28
+
+### Added
+
+- Function for Updating an appliance
+- Function for Removing an appliance
+
+### Changed
+
+- Adding support for contenttype in Invoke-OVGDRequest cmdlet
 
 ## [version 0.2.2] - 2019-03-27
 
