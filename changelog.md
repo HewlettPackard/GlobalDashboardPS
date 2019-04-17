@@ -36,6 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Output format
 
+## [version 0.4.1] - 2019-04-17
+
+### Changed
+
+- Renamed group Add-OVGDGroup to New-OVGDGroup
+
 ## [version 0.4.0] - 2019-04-17
 
 ### Added

@@ -16,7 +16,7 @@ For now the following functions are available. Please note that the output is mo
 - Get-OVGDConvergedSystem
 - Get-OVGDEnclosure
 - Get-OVGDGroup
-- Add-OVGDGroup
+- New-OVGDGroup
 - Remove-OVGDGroup
 - Get-OVGDGroupMember
 - Get-OVGDServerHardware
