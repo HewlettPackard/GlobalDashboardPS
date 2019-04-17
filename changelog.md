@@ -35,6 +35,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Output format
 
+## [version 0.4.4] - 2019-04-17
+
+### Fixed
+
+- Specified test in pipeline
+
+## [version 0.4.3] - 2019-04-17
+
+### Added
+
+- CI pipeline
+
 ## [version 0.4.2] - 2019-04-17
 
 ### Added
