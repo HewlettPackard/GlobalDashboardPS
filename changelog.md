@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Pester tests
 - Scriptanalyzer test
 - Function for adding members to a group
 - Function for removing members from a group
@@ -36,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Output format
+
+## [version 0.4.0] - 2019-04-17
+
+### Added
+
+- Pester tests
 
 ## [version 0.3.0] - 2019-03-28
 
