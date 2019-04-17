@@ -4,6 +4,12 @@
 
 This is a work in progress repo for creating a PS module for working with the HPE OneView Global Dashboard REST API
 
+The module is published to the [Powershell Gallery](https://www.powershellgallery.com/packages/GlobalDashboardPS). To install directly (note that you need to have Powershell get for this, please refer to the PS Gallery for more information):
+
+```powershell
+Install-Module -Name GlobalDashboardPS -Repository PSGallery
+```
+
 For now the following functions are available. Please note that the output is more or less the raw output from the API:
 
 - Connect-OVGD
