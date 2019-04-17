@@ -34,6 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Output format
 
+## [version 0.4.5] - 2019-04-17
+
+### Fixed
+
+- Tags in manifest file
+
 ## [version 0.4.4] - 2019-04-17
 
 ### Fixed
