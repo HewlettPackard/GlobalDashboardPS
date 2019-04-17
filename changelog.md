@@ -30,11 +30,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support queries
 - CI pipeline
 - Support PSCredential
-- Help text
 
 ### Changed
 
 - Output format
+
+## [version 0.4.2] - 2019-04-17
+
+### Added
+
+- Help text
 
 ## [version 0.4.1] - 2019-04-17
 
