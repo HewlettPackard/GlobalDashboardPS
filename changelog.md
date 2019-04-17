@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Scriptanalyzer test
 - Function for adding members to a group
 - Function for removing members from a group
 - Function for changing the name and/or the parent of a group
@@ -28,8 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for configuring a network interface
 - Support paging
 - Support queries
-- CI pipeline
 - Support PSCredential
+- Scriptanalyzer test
 
 ### Changed
 
