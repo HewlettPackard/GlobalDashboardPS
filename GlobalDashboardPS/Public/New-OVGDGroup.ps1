@@ -1,4 +1,4 @@
-function Add-OVGDGroup {
+function New-OVGDGroup {
     [CmdletBinding(SupportsShouldProcess)]
     param (
         $Server = $Global:OVGDPSServer,
