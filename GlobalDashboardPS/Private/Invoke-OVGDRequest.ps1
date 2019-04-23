@@ -8,7 +8,7 @@ function Invoke-OVGDRequest {
         $Resource,
         $Body,
         $Query,
-        # [ValidateRange("GET","POST","DELETE")]
+        [ValidateSet("GET","POST","DELETE")]
         $Method = "GET",
         $SessionKey = $global:OVGDPSToken,
         $ContentType = "application/json",
