@@ -34,6 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Output format
 
+## [version 0.4.6] - 2019-04-23
+
+### Changed
+
+- Validating method variable in the Invoke-OVGDRequest function
+
 ## [version 0.4.5] - 2019-04-17
 
 ### Fixed
