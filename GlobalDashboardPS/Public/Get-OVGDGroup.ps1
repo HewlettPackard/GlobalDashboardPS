@@ -44,8 +44,14 @@ function Get-OVGDGroup {
 
     process {
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
-        Invoke-OVGDRequest -Resource $Resource
+        $result = Invoke-OVGDRequest -Resource $Resource
 
+        if ($result.Count -lt $result.Total ) {
+            Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
+        }
+
+        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDGroup" -Object $result.items
+        return $output
     }
 
     end {

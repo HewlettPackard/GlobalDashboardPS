@@ -47,7 +47,14 @@ function Get-OVGDServerProfileTemplate {
     process {
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
         $Query = "count=$Count"
-        Invoke-OVGDRequest -Resource $Resource -Query $Query -Verbose
+        $result = Invoke-OVGDRequest -Resource $Resource -Query $Query -Verbose
+
+        if ($result.Count -lt $result.Total ) {
+            Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
+        }
+
+        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDServerProfileTemplate" -Object $result.members
+        return $output
     }
 
     end {

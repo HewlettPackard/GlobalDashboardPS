@@ -10,7 +10,7 @@ The module is published to the [Powershell Gallery](https://www.powershellgaller
 Install-Module -Name GlobalDashboardPS -Repository PSGallery
 ```
 
-For now the following functions are available. Please note that the output is more or less the raw output from the API:
+For now the following functions are available:
 
 - Connect-OVGD
 - New-OVGDSessionKey
@@ -34,3 +34,4 @@ For now the following functions are available. Please note that the output is mo
 - BuildResource (private function)
 - Invoke-OVGDRequest (private function)
 - Set-InsecureSSL (private function)
+- Add-OVGDTypeName (private function)
