@@ -589,6 +589,11 @@
              <Alignment>left</Alignment>
            </TableColumnHeader>
            <TableColumnHeader>
+             <Label>TaskType</Label>
+             <Width>15</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
              <Label>TaskState</Label>
              <Width>15</Width>
              <Alignment>left</Alignment>
@@ -609,6 +614,9 @@
              <TableColumnItems>
                <TableColumnItem>
                  <PropertyName>Name</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>TaskType</PropertyName>
                </TableColumnItem>
                <TableColumnItem>
                  <PropertyName>TaskState</PropertyName>
