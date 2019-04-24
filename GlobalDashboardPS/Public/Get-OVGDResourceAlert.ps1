@@ -1,4 +1,4 @@
-function Get-OVGDResourceAlerts {
+function Get-OVGDResourceAlert {
     <#
         .SYNOPSIS
             Retrieve resource alerts from a Global Dashboard instance
@@ -20,11 +20,11 @@ function Get-OVGDResourceAlerts {
         .PARAMETER Count
             The count of hardware to retrieve, defaults to 25
         .EXAMPLE
-            PS C:\> Get-OVGDResourceAlerts
+            PS C:\> Get-OVGDResourceAlert
 
             Returns the 25 latest resource alerts from the connected Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDResourceAlerts -Count 50
+            PS C:\> Get-OVGDResourceAlert -Count 50
 
             Returns the 50 latest resource alerts from the connected Global Dashboard instance
     #>
@@ -48,7 +48,7 @@ function Get-OVGDResourceAlerts {
             Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
         }
 
-        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDResourceAlerts" -Object $result.members
+        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDResourceAlert" -Object $result.members
         return $output
     }
 
