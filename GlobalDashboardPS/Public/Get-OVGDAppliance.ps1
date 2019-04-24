@@ -8,9 +8,10 @@ function Get-OVGDAppliance {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.3.0
+            Version : 0.3.1
             Revised : 24/04-2019
             Changelog:
+            0.3.1 -- Updated help text
             0.3.0 -- Added support for querying, changed text when result is bigger than count
             0.2.2 -- Fixed minor bug in help text, added link
             0.2.1 -- Added help text
@@ -26,13 +27,13 @@ function Get-OVGDAppliance {
         .PARAMETER Entity
             The appliance to retrieve
         .PARAMETER ApplianceName
-            Filter on ApplianceName of Appliance to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on ApplianceName of Appliance to retrieve. Note that we search for an exact match
         .PARAMETER ApplianceLocation
-            Filter on ApplianceLocation of Appliance to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on ApplianceLocation of Appliance to retrieve. Note that we search for an exact match
         .PARAMETER Status
-            Filter on Status of Appliance to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on Status of Appliance to retrieve. Note that we search for an exact match
         .PARAMETER State
-            Filter on State of Appliance to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on State of Appliance to retrieve. Note that we search for an exact match
         .PARAMETER UserQuery
             Query string used for full text search
         .PARAMETER Count
@@ -45,6 +46,14 @@ function Get-OVGDAppliance {
             PS C:\> Get-OVGDAppliance -Entity oneview-001
 
             Retrieves the specific OneView appliances with the name "oneview-001"
+        .EXAMPLE
+            PS C:\> Get-OVGDAppliance -ApplianceName Appliance01
+
+            Searches for a OneView Appliance with the specified Appliance Name
+        .EXAMPLE
+            PS C:\> Get-OVGDAppliance -UserQuery "c7000 Enclosure G3"
+
+            Performs a full text search and matches all attributes for the specified string
     #>
     [CmdletBinding(DefaultParameterSetName="Default")]
     param (

@@ -8,9 +8,10 @@ function Get-OVGDServerHardware {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.3.1
+            Version : 0.3.2
             Revised : 24/04-2019
             Changelog:
+            0.3.2 -- Updated help text
             0.3.1 -- Changed message when result is bigger than requested count
             0.3.0 -- Adding support for query
             0.2.2 -- Fixed minor bug in help text, added link
@@ -27,17 +28,17 @@ function Get-OVGDServerHardware {
         .PARAMETER Entity
             The Id of the Hardware to retrieve
         .PARAMETER ServerName
-            The ServerName of hardware to retrieve. Note the search is case-sensitive and searches for an exact match
+            The ServerName of hardware to retrieve. Note that we search for an exact match
         .PARAMETER SerialNumber
-            Filter on SerialNumber of hardware to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on SerialNumber of hardware to retrieve. Note that we search for an exact match
         .PARAMETER Appliance
-            Filter on Appliance of hardware to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on Appliance of hardware to retrieve. Note that we search for an exact match
         .PARAMETER Status
-            Filter on Status of hardware to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on Status of hardware to retrieve. Note that we search for an exact match
         .PARAMETER State
-            Filter on State of hardware to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on State of hardware to retrieve. Note that we search for an exact match
         .PARAMETER ILO
-            Filter on ILO Version (iLO4 / iLO5) of hardware to retrieve. Note the search is case-sensitive and searches for an exact match
+            Filter on ILO Version (iLO4 / iLO5) of hardware to retrieve. Note that we search for an exact match
         .PARAMETER UserQuery
             Query string used for full text search
         .PARAMETER Count
