@@ -27,6 +27,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support queries
 - Scriptanalyzer test
 
+## [version 0.7.2] - 2019-04-24
+
+### Changed
+
+- Output on Get-OVGDTask
+
+## [version 0.7.1] - 2019-04-24
+
+### Changed
+
+- Nothing.. Skipped due to mismatch of versioning
+
 ## [version 0.7.0] - 2019-04-24
 
 ### Added
