@@ -8,17 +8,20 @@ function Get-OVGDAppliance {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.2.1
-            Revised : 17/04-2019
+            Version : 0.2.2
+            Revised : 24/04-2019
             Changelog:
+            0.2.2 -- Fixed minor bug in help text, added link
             0.2.1 -- Added help text
             0.2.0 -- Added count param
         .LINK
             https://github.com/rumart/GlobalDashboardPS
         .LINK
             https://developer.hpe.com/blog/accessing-the-hpe-oneview-global-dashboard-api
+        .LINK
+            https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
-            The Global Dashboard to remove connection from
+            The Global Dashboard to retrieve appliances from
         .PARAMETER Entity
             The appliance to retrieve
         .PARAMETER Count

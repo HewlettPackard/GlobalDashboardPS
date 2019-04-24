@@ -8,13 +8,16 @@ function Get-OVGDResourceAlert {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 24/04-2019
-            Version : 0.1.0
-            Revised : 
+            Version : 0.1.1
+            Revised : 24/04-2019
             Changelog:
+            0.1.1 -- Added link to help text
         .LINK
             https://github.com/rumart/GlobalDashboardPS
         .LINK
             https://developer.hpe.com/blog/accessing-the-hpe-oneview-global-dashboard-api
+        .LINK
+            https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to work with, defaults to the Global variable OVGDPSServer
         .PARAMETER Count

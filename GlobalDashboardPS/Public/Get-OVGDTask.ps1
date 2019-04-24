@@ -1,27 +1,29 @@
 function Get-OVGDTask {
     <#
         .SYNOPSIS
-            Retrieves the Storage Systems connected to the Global Dashboard instance
+            Retrieves the Tasks on the Global Dashboard instance
         .DESCRIPTION
-            This function will retrieve the Storage Systems on the specified Global Dashboard instance
+            This function will retrieve the Tasks on the specified Global Dashboard instance
         .NOTES
             Info
             Author : Rudi Martinsen / Intility AS
-            Date : 25/03-2019
+            Date : 24/04-2019
             Version : 0.1.1
-            Revised : 17/04-2019
+            Revised : 24/04-2019
             Changelog:
-            0.1.1 -- Added help text
+            0.1.1 -- Fixed bug in help text and added link
         .LINK
             https://github.com/rumart/GlobalDashboardPS
         .LINK
             https://developer.hpe.com/blog/accessing-the-hpe-oneview-global-dashboard-api
+        .LINK
+            https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
-            The Global Dashboard to remove connection from
+            The Global Dashboard to retrieve Tasks from
         .PARAMETER Entity
-            The Id of the Storage System to retrieve
+            The Id of the Task to retrieve
         .PARAMETER Count
-            The count of Storage Systems to retrieve, defaults to 25
+            The count of Tasks to retrieve, defaults to 25
         .EXAMPLE
             PS C:\> Get-OVGDTask
 
