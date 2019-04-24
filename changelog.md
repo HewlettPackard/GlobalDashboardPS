@@ -14,9 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for changing the name and/or the parent of a group
 - Function for listing Storage pools
 - Function for listing Storage volumes
-- Function for listing Tasks
+- Function for listing Tasks (#3)
 - Function for listing SAN Managers
-- Function for listing Resource Alerts
 - Function for listing Managed SANs
 - Function for returning the sso url of an appliance
 - Function for returning the sso url of a server hardware
@@ -27,8 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for configuring a network interface
 - Support paging
 - Support queries
-- Support PSCredential
 - Scriptanalyzer test
+
+## [version 0.6.0] - 2019-04-24
+
+### Added
+
+- Support PSCredential (#1)
+- Function for listing Resource Alerts (#2)
 
 ## [version 0.5.0] - 2019-04-23
 

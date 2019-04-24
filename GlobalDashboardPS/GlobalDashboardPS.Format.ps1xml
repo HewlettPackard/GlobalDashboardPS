@@ -296,6 +296,62 @@
          </TableRowEntries>
        </TableControl>
       </View>
+      <View>
+       <Name>Default</Name>
+       <ViewSelectedBy>
+         <TypeName>GlobalDashboardPS.OVGDResourceAlerts</TypeName>
+       </ViewSelectedBy>
+       <TableControl>
+         <TableHeaders>
+           <TableColumnHeader>
+             <Label>Resource</Label>
+             <Width>20</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
+             <Label>ResourceType</Label>
+             <Width>20</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
+             <Label>Created</Label>
+             <Width>25</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
+             <Label>ApplianceName</Label>
+             <Width>15</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
+             <Label>AlertState</Label>
+             <Width>10</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+         </TableHeaders>
+         <TableRowEntries>
+           <TableRowEntry>
+             <TableColumnItems>
+               <TableColumnItem>
+                 <PropertyName>AssociatedResourceName</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>physicalResourceType</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>Created</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>ApplianceName</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>AlertState</PropertyName>
+               </TableColumnItem>
+             </TableColumnItems>
+           </TableRowEntry>
+         </TableRowEntries>
+       </TableControl>
+      </View>
      <View>
        <Name>Default</Name>
        <ViewSelectedBy>

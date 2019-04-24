@@ -26,6 +26,7 @@ For now the following functions are available:
 - Get-OVGDGroup
 - New-OVGDGroup
 - Remove-OVGDGroup
+- Get-OVGDResourceAlerts
 - Get-OVGDGroupMember
 - Get-OVGDServerHardware
 - Get-OVGDServerProfile
