@@ -299,7 +299,7 @@
       <View>
        <Name>Default</Name>
        <ViewSelectedBy>
-         <TypeName>GlobalDashboardPS.OVGDResourceAlerts</TypeName>
+         <TypeName>GlobalDashboardPS.OVGDResourceAlert</TypeName>
        </ViewSelectedBy>
        <TableControl>
          <TableHeaders>
@@ -570,6 +570,54 @@
                </TableColumnItem>
                <TableColumnItem>
                  <scriptblock>($_.FreeCapacity / 1GB)</scriptblock>
+               </TableColumnItem>
+             </TableColumnItems>
+           </TableRowEntry>
+         </TableRowEntries>
+       </TableControl>
+      </View>
+      <View>
+       <Name>Default</Name>
+       <ViewSelectedBy>
+         <TypeName>GlobalDashboardPS.OVGDTask</TypeName>
+       </ViewSelectedBy>
+       <TableControl>
+         <TableHeaders>
+           <TableColumnHeader>
+             <Label>Name</Label>
+             <Width>30</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
+             <Label>TaskState</Label>
+             <Width>15</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
+             <Label>Created</Label>
+             <Width>25</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+           <TableColumnHeader>
+             <Label>Owner</Label>
+             <Width>15</Width>
+             <Alignment>left</Alignment>
+           </TableColumnHeader>
+         </TableHeaders>
+         <TableRowEntries>
+           <TableRowEntry>
+             <TableColumnItems>
+               <TableColumnItem>
+                 <PropertyName>Name</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>TaskState</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>Created</PropertyName>
+               </TableColumnItem>
+               <TableColumnItem>
+                 <PropertyName>Owner</PropertyName>
                </TableColumnItem>
              </TableColumnItems>
            </TableRowEntry>

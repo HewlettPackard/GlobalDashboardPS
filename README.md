@@ -32,6 +32,7 @@ For now the following functions are available:
 - Get-OVGDServerProfile
 - Get-OVGDServerProfileTemplate
 - Get-OVGDStorageSystem
+- Get-OVGDTask
 - BuildResource (private function)
 - Invoke-OVGDRequest (private function)
 - Set-InsecureSSL (private function)
