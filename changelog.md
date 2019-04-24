@@ -12,10 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for adding members to a group
 - Function for removing members from a group
 - Function for changing the name and/or the parent of a group
-- Function for listing Storage pools
-- Function for listing Storage volumes
-- Function for listing SAN Managers
-- Function for listing Managed SANs
 - Function for returning the sso url of an appliance
 - Function for returning the sso url of a server hardware
 - Function for returning the sso url of an enclosure
@@ -23,9 +19,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for removing a server certificate
 - Function for listing the configuration of the network interfaces
 - Function for configuring a network interface
-- Support paging
-- Support queries
+- Support paging (#8)
+- Support queries (#9)
 - Scriptanalyzer test
+
+## [version 0.8.0] - 2019-04-24
+
+### Added
+
+- Function for listing Storage pools (#4)
+- Function for listing Storage volumes (#5)
+- Function for listing SAN Managers (#6)
+- Function for listing Managed SANs (#7)
+
+### Changed
+
+- Minor change to help text (server parameter) on most functions
 
 ## [version 0.7.2] - 2019-04-24
 

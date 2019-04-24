@@ -33,6 +33,10 @@ For now the following functions are available:
 - Get-OVGDServerProfileTemplate
 - Get-OVGDStorageSystem
 - Get-OVGDTask
+- Get-OVGDManagedSAN
+- Get-OVGDSANManager
+- Get-OVGDStoragePool
+- Get-OVGDStorageVolume
 - BuildResource (private function)
 - Invoke-OVGDRequest (private function)
 - Set-InsecureSSL (private function)
