@@ -8,9 +8,10 @@ function Get-OVGDServerHardware {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.3.0
+            Version : 0.3.1
             Revised : 24/04-2019
             Changelog:
+            0.3.1 -- Changed message when result is bigger than requested count
             0.3.0 -- Adding support for query
             0.2.2 -- Fixed minor bug in help text, added link
             0.2.1 -- Added help text
@@ -136,8 +137,9 @@ function Get-OVGDServerHardware {
 
         $result = Invoke-OVGDRequest -Resource $Resource -Query $Query #-Verbose
 
+        Write-Verbose "Found $($result.total) number of results"
         if ($result.Count -lt $result.Total ) {
-            Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
+            Write-Warning "The result has been paged. Total number of results is: $($result.total)"
         }
         
         $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDServerHardware" -Object $result.members
