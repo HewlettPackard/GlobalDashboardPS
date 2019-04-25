@@ -21,6 +21,20 @@ function Get-OVGDStorageVolume {
             The Global Dashboard to retrieve Storage Volumes from
         .PARAMETER Entity
             The Id of the Storage Volume to retrieve
+        .PARAMETER StorageVolumeName
+            Filter on the Name of the Storage Volume to retrieve. Note that we search for an exact match
+        .PARAMETER PrimaryKey
+            Filter on the PrimaryKey of the Storage Volume to retrieve. Note that we search for an exact match
+        .PARAMETER ProvisioningType
+            Filter on the Provisioning Type of the Storage Volume to retrieve. Note that we search for an exact match
+        .PARAMETER TemplateConsistency
+            Filter on the Template Consistency of the Storage Volume to retrieve. Note that we search for an exact match
+        .PARAMETER State
+            Filter on the State of the Storage Volume to retrieve. Note that we search for an exact match
+        .PARAMETER Status
+            Filter on the Status of the Storage Volume to retrieve. Note that we search for an exact match
+        .PARAMETER UserQuery
+            Query string used for full text search
         .PARAMETER Count
             The count of Storage Volumes to retrieve, defaults to 25
         .EXAMPLE
@@ -31,12 +45,41 @@ function Get-OVGDStorageVolume {
             PS C:\> Get-OVGDStorageVolume -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
             Lists the Storage Volume on the connected Global Dashboard instance with the specified Id
+        .EXAMPLE
+            PS C:\> Get-OVGDStorageVolume -TemplateConsistency Inconsistent
+
+            Lists the Storage Volume on the connected Global Dashboard instance with an Inconsistent Template Consistency
     #>
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName="Default")]
     param (
+        [Parameter(ParameterSetName="Default")]
+        [Parameter(ParameterSetName="Id")]
+        [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
+        [Parameter(ParameterSetName="Id")]
         [alias("StorageVolume")]
         $Entity,
+        [Parameter(ParameterSetName="Query")]
+        $StorageVolumeName,
+        [Parameter(ParameterSetName="Query")]
+        $PrimaryKey,
+        [Parameter(ParameterSetName="Query")]
+        [ValidateSet("Thin","Full")]
+        $ProvisioningType,
+        [Parameter(ParameterSetName="Query")]
+        [ValidateSet("Consistent","Inconsistent")]
+        $TemplateConsistency,
+        [Parameter(ParameterSetName="Query")]
+        [ValidateSet("AddFailed", "Adding", "Configured", "Connected", "Copying", "CreateFailed", "Creating", "DeleteFailed", "Deleting", "Discovered", "Managed", "Normal", "UpdateFailed", "Updating")]
+        $State,
+        [Parameter(ParameterSetName="Query")]
+        [ValidateSet("OK","Warning","Critical","Disabled","Unknown")]
+        $Status,
+        [Parameter(ParameterSetName="Query")]
+        $UserQuery,
+        [Parameter(ParameterSetName="Default")]
+        [Parameter(ParameterSetName="Id")]
+        [Parameter(ParameterSetName="Query")]
         $Count = 25
     )
 
@@ -46,10 +89,52 @@ function Get-OVGDStorageVolume {
 
     process {
         $Resource = BuildPath -Resource $ResourceType -Entity $Entity
-        $result = Invoke-OVGDRequest -Resource $Resource
+        $searchFilters = @()
+        $txtSearchFilters = @()
 
+        if($StorageVolumeName){
+            $searchFilters += 'name EQ "' + $StorageVolumeName + '"'
+        }
+
+        if($PrimaryKey){
+            $searchFilters += 'primaryKey EQ "' + $PrimaryKey + '"'
+        }
+
+        if($ProvisioningType){
+            $searchFilters += 'provisioningType EQ "' + $ProvisioningType + '"'
+        }
+
+        if($TemplateConsistency){
+            $searchFilters += 'templateConsistency EQ "' + $TemplateConsistency + '"'
+        }
+
+        if($State){
+            $searchFilters += 'state EQ "' + $State + '"'
+        }
+
+        if($Status){
+            $searchFilters += 'status EQ "' + $Status + '"'
+        }
+        
+        if($UserQuery){
+            $txtSearchFilters += "$UserQuery"
+        }
+
+        if($searchFilters){
+            $filterQry = $searchFilters -join " AND "
+            $Query += '&query="' + $filterQry + '"'
+        }
+
+        if($txtSearchFilters){
+            $filterQry = $txtSearchFilters -join " AND "
+            $Query += '&userQuery="' + $filterQry + '"'
+        }
+        
+        $result = Invoke-OVGDRequest -Resource $Resource -Query $Query
+
+        Write-Verbose "Found $($result.total) number of results"
         if ($result.Count -lt $result.Total ) {
-            Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
+            Write-Warning "The result has been paged. Total number of results is: $($result.total)"
         }
 
         $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDStorageVolume" -Object $result.members
