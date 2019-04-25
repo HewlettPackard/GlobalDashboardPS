@@ -38,10 +38,6 @@ function Get-OVGDCertificate {
     process {
         $result = Invoke-OVGDRequest -Resource $Resource
 
-        if ($result.Count -lt $result.Total ) {
-            Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
-        }
-
         $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDCertificate" -Object $result
         return $output
     }

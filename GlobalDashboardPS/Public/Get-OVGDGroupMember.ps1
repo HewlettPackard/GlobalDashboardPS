@@ -45,12 +45,21 @@ function Get-OVGDGroupMember {
 
         $result = Invoke-OVGDRequest -Resource ($Resource + "/members")
 
-        if ($result.Count -lt $result.Total ) {
-            Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
+        if($result.Count -ge 1){
+            Write-Verbose "Found $($result.total) number of results"
+            $output = $result.items
+        }
+        elseif($result.Count -eq 0){
+            return $null
+        }
+        else{
+            $output = $result
         }
 
-        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDGroupMember" -Object $result.items
-        return $output
+        if($Output){
+            $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDGroupMember" -Object $output
+            return $output
+        }
     }
 
     end {

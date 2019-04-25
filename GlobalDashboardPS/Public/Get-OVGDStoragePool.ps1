@@ -8,9 +8,10 @@ function Get-OVGDStoragePool {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 24/04-2019
-            Version : 0.3.0
+            Version : 0.4.0
             Revised : 25/04-2019
             Changelog:
+            0.4.0 -- Reworked output
             0.3.0 -- Changed Entity parameter to Id, adding Name alias
             0.2.0 -- Added support for querying, changed warning text when result is bigger than count
         .LINK
@@ -73,7 +74,6 @@ function Get-OVGDStoragePool {
         [Parameter(ParameterSetName="Query")]
         $UserQuery,
         [Parameter(ParameterSetName="Default")]
-        [Parameter(ParameterSetName="Id")]
         [Parameter(ParameterSetName="Query")]
         $Count = 25
     )
@@ -123,13 +123,30 @@ function Get-OVGDStoragePool {
         
         $result = Invoke-OVGDRequest -Resource $Resource -Query $Query
 
-        Write-Verbose "Found $($result.total) number of results"
+        Write-Verbose "Got $($result.count) number of results"
+
         if ($result.Count -lt $result.Total ) {
             Write-Warning "The result has been paged. Total number of results is: $($result.total)"
         }
+        
+        if($result.Count -ge 1){
+            Write-Verbose "Found $($result.total) number of results"
+            $output = $result.members
+        }
+        elseif($result.Count -eq 0){
+            return $null
+        }
+        elseif($result.category -eq $ResourceType){
+            $output = $result
+        }
+        else{
+            return $result
+        }
 
-        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDStoragePool" -Object $result.members
-        return $output
+        if($Output){
+            $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDStoragePool" -Object $output
+            return $output
+        }
     }
 
     end {

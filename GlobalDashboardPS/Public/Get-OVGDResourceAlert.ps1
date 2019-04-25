@@ -8,9 +8,11 @@ function Get-OVGDResourceAlert {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 24/04-2019
-            Version : 0.2.0
+            Version : 0.4.0
             Revised : 25/04-2019
             Changelog:
+            0.4.0 -- Reworked output
+            0.3.0 -- Added Id param, Fixed output when returning single result
             0.2.0 -- Added support for querying and changed warning when result is bigger than count
             0.1.1 -- Added link to help text
         .LINK
@@ -54,6 +56,9 @@ function Get-OVGDResourceAlert {
         [Parameter(ParameterSetName="Id")]
         [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
+        [Parameter(ParameterSetName="Id")]
+        [alias("Entity")]
+        $ID,
         [Parameter(ParameterSetName="Query")]
         $ResourceName,
         [Parameter(ParameterSetName="Query")]
@@ -75,7 +80,6 @@ function Get-OVGDResourceAlert {
         [Parameter(ParameterSetName="Query")]
         $UserQuery,
         [Parameter(ParameterSetName="Default")]
-        [Parameter(ParameterSetName="Id")]
         [Parameter(ParameterSetName="Query")]
         $Count = 25
     )
@@ -85,7 +89,7 @@ function Get-OVGDResourceAlert {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $Query = "count=$Count"
         
         $searchFilters = @()
@@ -131,13 +135,30 @@ function Get-OVGDResourceAlert {
         
         $result = Invoke-OVGDRequest -Resource $Resource -Query $Query
 
-        Write-Verbose "Found $($result.total) number of results"
+        Write-Verbose "Got $($result.count) number of results"
+
         if ($result.Count -lt $result.Total ) {
             Write-Warning "The result has been paged. Total number of results is: $($result.total)"
         }
+        
+        if($result.Count -ge 1){
+            Write-Verbose "Found $($result.total) number of results"
+            $output = $result.members
+        }
+        elseif($result.Count -eq 0){
+            return $null
+        }
+        elseif($result.category -eq $ResourceType){
+            $output = $result
+        }
+        else{
+            return $result
+        }
 
-        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDResourceAlert" -Object $result.members
-        return $output
+        if($Output){
+            $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDResourceAlert" -Object $output
+            return $output
+        }
     }
 
     end {

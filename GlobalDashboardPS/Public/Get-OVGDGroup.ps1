@@ -8,9 +8,10 @@ function Get-OVGDGroup {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.3.0
+            Version : 0.4.0
             Revised : 25/04-2019
             Changelog:
+            0.4.0 -- Reworked output
             0.3.0 -- Changed Entity parameter to Id
             0.2.1 -- Added help text
             0.2.0 -- Added count param
@@ -51,8 +52,30 @@ function Get-OVGDGroup {
             Write-Verbose "The result has been paged. Total number of results is: $($result.total)"
         }
 
-        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDGroup" -Object $result.items
-        return $output
+        Write-Verbose "Got $($result.count) number of results"
+
+        if ($result.Count -lt $result.Total ) {
+            Write-Warning "The result has been paged. Total number of results is: $($result.total)"
+        }
+        
+        if($result.Count -ge 1){
+            Write-Verbose "Found $($result.total) number of results"
+            $output = $result.items
+        }
+        elseif($result.Count -eq 0){
+            return $null
+        }
+        elseif($result.category -eq $ResourceType){
+            $output = $result
+        }
+        else{
+            return $result
+        }
+
+        if($Output){
+            $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDGroup" -Object $output
+            return $output
+        }
     }
 
     end {

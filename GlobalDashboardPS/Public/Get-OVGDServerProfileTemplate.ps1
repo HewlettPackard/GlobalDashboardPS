@@ -8,9 +8,10 @@ function Get-OVGDServerProfileTemplate {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.4.0
+            Version : 0.5.0
             Revised : 25/04-2019
             Changelog:
+            0.5.0 -- Reworked output
             0.4.0 -- Changed Entity parameter to Id, adding Name alias
             0.3.0 -- Added support for querying and changed warning when result is bigger than count
             0.2.2 -- Fixed bug in help text and added link
@@ -70,7 +71,6 @@ function Get-OVGDServerProfileTemplate {
         [Parameter(ParameterSetName="Query")]
         $UserQuery,
         [Parameter(ParameterSetName="Default")]
-        [Parameter(ParameterSetName="Id")]
         [Parameter(ParameterSetName="Query")]
         $Count = 25
     )
@@ -117,13 +117,30 @@ function Get-OVGDServerProfileTemplate {
 
         $result = Invoke-OVGDRequest -Resource $Resource -Query $Query #-Verbose
 
-        Write-Verbose "Found $($result.total) number of results"
+        Write-Verbose "Got $($result.count) number of results"
+
         if ($result.Count -lt $result.Total ) {
             Write-Warning "The result has been paged. Total number of results is: $($result.total)"
         }
-
-        $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDServerProfileTemplate" -Object $result.members
-        return $output
+        
+        if($result.Count -ge 1){
+            Write-Verbose "Found $($result.total) number of results"
+            $output = $result.members
+        }
+        elseif($result.Count -eq 0){
+            return $null
+        }
+        elseif($result.category -eq $ResourceType){
+            $output = $result
+        }
+        else{
+            return $result
+        }
+        
+        if($Output){
+            $output = Add-OVGDTypeName -TypeName "GlobalDashboardPS.OVGDServerProfileTemplate" -Object $output
+            return $output
+        }
     }
 
     end {
