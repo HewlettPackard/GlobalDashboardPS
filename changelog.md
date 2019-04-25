@@ -20,8 +20,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Function for listing the configuration of the network interfaces
 - Function for configuring a network interface
 - Support paging (#8)
-- Support queries (#9)
 - Scriptanalyzer test
+
+## [version 0.9.0] - 2019-04-25
+
+### Added
+
+- Support queries (#9)
+
+### Changed / Breaking
+
+- Changed Entity parameter to Id for all functions (added Entity as alias)
+
+### Fixed
+
+- Reworked output to fix issue with outputting a single object (#10)
+- Fixed missing query for state on Get-OVGDServerHardware
 
 ## [version 0.8.0] - 2019-04-24
 
