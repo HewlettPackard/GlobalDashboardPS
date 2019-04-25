@@ -8,9 +8,10 @@ function Get-OVGDSANManager {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 24/04-2019
-            Version : 0.2.0
+            Version : 0.3.0
             Revised : 25/04-2019
             Changelog:
+            0.3.0 -- Changed Entity parameter to Id, adding Name alias
             0.2.0 -- Added support for querying, changed warning text when result is bigger than count
         .LINK
             https://github.com/rumart/GlobalDashboardPS
@@ -20,7 +21,7 @@ function Get-OVGDSANManager {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve SAN Managers from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the SAN Manager to retrieve
         .PARAMETER Name
             Filter on the Name of the SAN Manager to retrieve. Note that we search for an exact match
@@ -39,7 +40,7 @@ function Get-OVGDSANManager {
 
             Lists the SAN Managers on the connected Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDSANManager -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
+            PS C:\> Get-OVGDSANManager -Id xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
             Lists the SAN Manager on the connected Global Dashboard instance with the specified Id
         .EXAMPLE
@@ -54,8 +55,8 @@ function Get-OVGDSANManager {
         [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
         [Parameter(ParameterSetName="Id")]
-        [alias("SANManager")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
         $Name,
         [Parameter(ParameterSetName="Query")]
@@ -80,7 +81,7 @@ function Get-OVGDSANManager {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $Query = "count=$Count"
         $searchFilters = @()
         $txtSearchFilters = @()

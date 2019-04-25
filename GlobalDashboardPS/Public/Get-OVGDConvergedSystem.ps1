@@ -8,9 +8,10 @@ function Get-OVGDConvergedSystem {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.2.0
+            Version : 0.3.0
             Revised : 25/04-2019
             Changelog:
+            0.3.0 -- Changed Entity parameter to Id, adding Name alias
             0.2.0 -- Added support for querying, changed warning text when result is bigger than count
             0.1.2 -- Fixed bug in help text and added link
             0.1.1 -- Added help text
@@ -22,7 +23,7 @@ function Get-OVGDConvergedSystem {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve Converged systems from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the Converged system to retrieve
         .PARAMETER SystemName
             Filter on the System name of the Converged system to retrieve. Note that we search for an exact match
@@ -38,10 +39,7 @@ function Get-OVGDConvergedSystem {
             PS C:\> Get-OVGDConvergedSystem
 
             Retrieves all Converged systems connected to the Global Dashboard instance
-        .EXAMPLE
-            PS C:\> Get-OVGDConvergedSystem -Entity system-001
-
-            Retrieves the specific Converged system with the name "system-001"
+        
         .EXAMPLE
             PS C:\> Get-OVGDConvergedSystem -Appliance appliance-01
 
@@ -54,9 +52,10 @@ function Get-OVGDConvergedSystem {
         [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
         [Parameter(ParameterSetName="Id")]
-        [alias("ConvergedSystem")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
+        [alias("Name")]
         $SystemName,
         [Parameter(ParameterSetName="Query")]
         $Appliance,
@@ -77,7 +76,7 @@ function Get-OVGDConvergedSystem {
 
     process {
 
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
 
         $Query = "count=$Count"
         $searchFilters = @()

@@ -8,9 +8,11 @@ function Get-OVGDStorageVolume {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 24/04-2019
-            Version : 0.1.0
-            Revised : 
+            Version : 0.3.0
+            Revised : 25/04-2019
             Changelog:
+            0.3.0 -- Changed Entity parameter to Id, adding Name alias
+            0.2.0 -- Added support for querying, changed warning text when result is bigger than count
         .LINK
             https://github.com/rumart/GlobalDashboardPS
         .LINK
@@ -19,7 +21,7 @@ function Get-OVGDStorageVolume {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve Storage Volumes from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the Storage Volume to retrieve
         .PARAMETER StorageVolumeName
             Filter on the Name of the Storage Volume to retrieve. Note that we search for an exact match
@@ -42,7 +44,7 @@ function Get-OVGDStorageVolume {
 
             Lists the Storage Volumes on the connected Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDStorageVolume -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
+            PS C:\> Get-OVGDStorageVolume -Id xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
             Lists the Storage Volume on the connected Global Dashboard instance with the specified Id
         .EXAMPLE
@@ -57,9 +59,10 @@ function Get-OVGDStorageVolume {
         [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
         [Parameter(ParameterSetName="Id")]
-        [alias("StorageVolume")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
+        [alias("Name")]
         $StorageVolumeName,
         [Parameter(ParameterSetName="Query")]
         $PrimaryKey,
@@ -88,7 +91,7 @@ function Get-OVGDStorageVolume {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $searchFilters = @()
         $txtSearchFilters = @()
 

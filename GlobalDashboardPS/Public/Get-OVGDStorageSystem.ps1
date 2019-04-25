@@ -8,9 +8,10 @@ function Get-OVGDStorageSystem {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.2.0
+            Version : 0.3.0
             Revised : 25/04-2019
             Changelog:
+            0.3.0 -- Changed Entity parameter to Id, adding Name alias
             0.2.0 -- Added support for querying and changed warning when result is bigger than count
             0.1.2 -- Fixed bug in help text and added link
             0.1.1 -- Added help text
@@ -22,10 +23,10 @@ function Get-OVGDStorageSystem {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve Storage System from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the Storage System to retrieve
         .PARAMETER StorageSystemName
-            The ServerName of Storage System to retrieve. Note that we search for an exact match
+            Filter on the ServerName of Storage System to retrieve. Note that we search for an exact match
         .PARAMETER PrimaryKey
             Filter on PrimaryKey of Storage System to retrieve. Note that we search for an exact match
         .PARAMETER Family
@@ -43,19 +44,19 @@ function Get-OVGDStorageSystem {
         .PARAMETER Count
             The count of hardware to retrieve, defaults to 25
         .EXAMPLE
-            PS C:\> Get-OVGDServerHardware
+            PS C:\> Get-OVGDStorageSystem
 
-            Retrieves all server hardware connected to the Global Dashboard instance
+            Retrieves all Storage Systems connected to the Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDServerHardware -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
+            PS C:\> Get-OVGDStorageSystem -Id xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
-            Retrieves the specific Server Hardware with the specified ID
+            Retrieves the specific Storage Systems with the specified ID
         .EXAMPLE
-            PS C:\> Get-OVGDServerHardware -ServerName my-server-name-001
+            PS C:\> Get-OVGDStorageSystem -StorageSystemName my-system-name-001
 
-            Searches for a server with the specified servername
+            Searches for a Storage System with the specified name
         .EXAMPLE
-            PS C:\> Get-OVGDServerHardware -UserQuery "Proliant DL360"
+            PS C:\> Get-OVGDStorageSystem -UserQuery "Proliant DL360"
 
             Performs a full text search and matches all attributes for the specified string
     #>
@@ -66,9 +67,10 @@ function Get-OVGDStorageSystem {
         [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
         [Parameter(ParameterSetName="Id")]
-        [alias("StorageSystem")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
+        [alias("Name")]
         $StorageSystemName,
         [Parameter(ParameterSetName="Query")]
         $PrimaryKey,
@@ -100,7 +102,7 @@ function Get-OVGDStorageSystem {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $Query = "count=$Count"
         $searchFilters = @()
         $txtSearchFilters = @()

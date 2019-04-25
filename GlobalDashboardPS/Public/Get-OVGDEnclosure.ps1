@@ -8,9 +8,10 @@ function Get-OVGDEnclosure {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.2.0
-            Revised : 24/04-2019
+            Version : 0.3.0
+            Revised : 25/04-2019
             Changelog:
+            0.3.0 -- Changed Entity parameter to Id, adding Name alias
             0.2.0 -- Added support for querying, changed warning text when result is bigger than count
             0.1.2 -- Fixed bug in help text and added link
             0.1.1 -- Added help text
@@ -22,10 +23,10 @@ function Get-OVGDEnclosure {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve Enclosures from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the Enclosure to retrieve
         .PARAMETER EnclosureName
-            The ServerName of Enclosure to retrieve. Note that we search for an exact match
+            Filter on the Name of Enclosure to retrieve. Note that we search for an exact match
         .PARAMETER SerialNumber
             Filter on SerialNumber of Enclosure to retrieve. Note that we search for an exact match
         .PARAMETER Appliance
@@ -45,7 +46,7 @@ function Get-OVGDEnclosure {
 
             Retrieves all Enclosures connected to the Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDEnclosure -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
+            PS C:\> Get-OVGDEnclosure -Id xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
             Retrieves the specific Enclosure with the specified ID
         .EXAMPLE
@@ -95,7 +96,7 @@ function Get-OVGDEnclosure {
 
     process {
 
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $Query = "count=$Count"
         $searchFilters = @()
         $txtSearchFilters = @()

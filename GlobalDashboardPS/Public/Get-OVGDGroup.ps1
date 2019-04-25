@@ -8,9 +8,10 @@ function Get-OVGDGroup {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.2.1
-            Revised : 17/04-2019
+            Version : 0.3.0
+            Revised : 25/04-2019
             Changelog:
+            0.3.0 -- Changed Entity parameter to Id
             0.2.1 -- Added help text
             0.2.0 -- Added count param
         .LINK
@@ -26,15 +27,15 @@ function Get-OVGDGroup {
 
             Lists the groups on the connected Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDGroup -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
+            PS C:\> Get-OVGDGroup -Id xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
             Lists the groups on the connected Global Dashboard instance with the specified Id
     #>
     [CmdletBinding()]
     param (
         $Server = $Global:OVGDPSServer,
-        [alias("Group")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         $Count = 25
     )
 
@@ -43,7 +44,7 @@ function Get-OVGDGroup {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $result = Invoke-OVGDRequest -Resource $Resource
 
         if ($result.Count -lt $result.Total ) {

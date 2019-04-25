@@ -8,9 +8,10 @@ function Get-OVGDServerProfileTemplate {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.3.0
+            Version : 0.4.0
             Revised : 25/04-2019
             Changelog:
+            0.4.0 -- Changed Entity parameter to Id, adding Name alias
             0.3.0 -- Added support for querying and changed warning when result is bigger than count
             0.2.2 -- Fixed bug in help text and added link
             0.2.1 -- Added help text
@@ -23,7 +24,7 @@ function Get-OVGDServerProfileTemplate {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve Server Profile Templates from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the Server Profile Template to retrieve
         .PARAMETER TemplateName
             Filter on the Name of the Server Profile Template to retrieve. Note that we search for an exact match
@@ -42,7 +43,7 @@ function Get-OVGDServerProfileTemplate {
 
             Retrieves all Server Profile Templates connected to the Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDServerProfileTemplate -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
+            PS C:\> Get-OVGDServerProfileTemplate -Id xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
             Retrieves the specific Server Profile Template with the specified ID
     #>
@@ -53,9 +54,10 @@ function Get-OVGDServerProfileTemplate {
         [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
         [Parameter(ParameterSetName="Id")]
-        [alias("ServerProfileTemplate")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
+        [alias("Name")]
         $TemplateName,
         [Parameter(ParameterSetName="Query")]
         $Appliance,
@@ -78,7 +80,7 @@ function Get-OVGDServerProfileTemplate {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $Query = "count=$Count"
         $searchFilters = @()
         $txtSearchFilters = @()

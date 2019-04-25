@@ -8,9 +8,10 @@ function Get-OVGDServerHardware {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.3.2
-            Revised : 24/04-2019
+            Version : 0.4.0
+            Revised : 25/04-2019
             Changelog:
+            0.4.0 -- Changed Entity parameter to Id, adding Name alias
             0.3.2 -- Updated help text
             0.3.1 -- Changed message when result is bigger than requested count
             0.3.0 -- Adding support for query
@@ -25,10 +26,10 @@ function Get-OVGDServerHardware {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve Server Hardware from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the Hardware to retrieve
         .PARAMETER ServerName
-            The ServerName of hardware to retrieve. Note that we search for an exact match
+            Filter on the ServerName of hardware to retrieve. Note that we search for an exact match
         .PARAMETER SerialNumber
             Filter on SerialNumber of hardware to retrieve. Note that we search for an exact match
         .PARAMETER Appliance
@@ -48,7 +49,7 @@ function Get-OVGDServerHardware {
 
             Retrieves all server hardware connected to the Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDServerHardware -Entity xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
+            PS C:\> Get-OVGDServerHardware -Id xxxxxxxx-xxxx-xxxx-xxxx-54e195f27f36
 
             Retrieves the specific Server Hardware with the specified ID
         .EXAMPLE
@@ -67,9 +68,10 @@ function Get-OVGDServerHardware {
         [Parameter(ParameterSetName="Query")]
         $Server,
         [Parameter(ParameterSetName="Id")]
-        [alias("ServerHardware")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
+        [alias("Name")]
         $ServerName,
         [Parameter(ParameterSetName="Query")]
         $SerialNumber,
@@ -97,7 +99,7 @@ function Get-OVGDServerHardware {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $Query = "count=$Count"
         $searchFilters = @()
         $txtSearchFilters = @()

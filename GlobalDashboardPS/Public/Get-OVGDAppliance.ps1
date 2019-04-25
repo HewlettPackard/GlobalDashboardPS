@@ -8,9 +8,10 @@ function Get-OVGDAppliance {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 25/03-2019
-            Version : 0.3.1
-            Revised : 24/04-2019
+            Version : 0.4.0
+            Revised : 25/04-2019
             Changelog:
+            0.4.0 -- Changed Entity parameter to Id, adding Name alias
             0.3.1 -- Updated help text
             0.3.0 -- Added support for querying, changed text when result is bigger than count
             0.2.2 -- Fixed minor bug in help text, added link
@@ -24,8 +25,8 @@ function Get-OVGDAppliance {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve appliances from
-        .PARAMETER Entity
-            The appliance to retrieve
+        .PARAMETER Id
+            The Id of the Appliance to retrieve
         .PARAMETER ApplianceName
             Filter on ApplianceName of Appliance to retrieve. Note that we search for an exact match
         .PARAMETER ApplianceLocation
@@ -43,10 +44,6 @@ function Get-OVGDAppliance {
 
             Retrieves all OneView appliances connected to the Global Dashboard instance
         .EXAMPLE
-            PS C:\> Get-OVGDAppliance -Entity oneview-001
-
-            Retrieves the specific OneView appliances with the name "oneview-001"
-        .EXAMPLE
             PS C:\> Get-OVGDAppliance -ApplianceName Appliance01
 
             Searches for a OneView Appliance with the specified Appliance Name
@@ -63,9 +60,10 @@ function Get-OVGDAppliance {
         $Server,
         [Parameter(Mandatory=$false,ValueFromPipeline=$true)]
         [Parameter(ParameterSetName="Id")]
-        [alias("Appliance")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
+        [alias("Name")]
         $ApplianceName,
         [Parameter(ParameterSetName="Query")]
         $ApplianceLocation,
@@ -87,7 +85,7 @@ function Get-OVGDAppliance {
 
     }
     PROCESS {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $Query = "count=$Count"
         $searchFilters = @()
         $txtSearchFilters = @()

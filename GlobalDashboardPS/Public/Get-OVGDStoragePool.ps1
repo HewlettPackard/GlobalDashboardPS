@@ -8,9 +8,10 @@ function Get-OVGDStoragePool {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 24/04-2019
-            Version : 0.2.0
+            Version : 0.3.0
             Revised : 25/04-2019
             Changelog:
+            0.3.0 -- Changed Entity parameter to Id, adding Name alias
             0.2.0 -- Added support for querying, changed warning text when result is bigger than count
         .LINK
             https://github.com/rumart/GlobalDashboardPS
@@ -20,7 +21,7 @@ function Get-OVGDStoragePool {
             https://rudimartinsen.com/2019/04/23/hpe-oneview-global-dashboard-powershell-module/
         .PARAMETER Server
             The Global Dashboard to retrieve Storage Pools from
-        .PARAMETER Entity
+        .PARAMETER Id
             The Id of the Storage Pool to retrieve
         .PARAMETER StorageSystemName
             Filter on the Storage System of the Storage Pool to retrieve. Note that we search for an exact match
@@ -54,9 +55,10 @@ function Get-OVGDStoragePool {
         [Parameter(ParameterSetName="Query")]
         $Server = $Global:OVGDPSServer,
         [Parameter(ParameterSetName="Id")]
-        [alias("StoragePool")]
-        $Entity,
+        [alias("Entity")]
+        $Id,
         [Parameter(ParameterSetName="Query")]
+        [alias("Name")]
         $StoragePoolName,
         [Parameter(ParameterSetName="Query")]
         $StorageSystemName,
@@ -81,7 +83,7 @@ function Get-OVGDStoragePool {
     }
 
     process {
-        $Resource = BuildPath -Resource $ResourceType -Entity $Entity
+        $Resource = BuildPath -Resource $ResourceType -Entity $Id
         $searchFilters = @()
         $txtSearchFilters = @()
 
