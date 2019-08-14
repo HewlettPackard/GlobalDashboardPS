@@ -8,9 +8,10 @@ function Get-OVGDResourceAlert {
             Info
             Author : Rudi Martinsen / Intility AS
             Date : 24/04-2019
-            Version : 0.4.0
-            Revised : 25/04-2019
+            Version : 0.5.0
+            Revised : 14/08-2019
             Changelog:
+            0.5.0 -- Added param for ServiceEvents
             0.4.0 -- Reworked output
             0.3.0 -- Added Id param, Fixed output when returning single result
             0.2.0 -- Added support for querying and changed warning when result is bigger than count
@@ -33,6 +34,8 @@ function Get-OVGDResourceAlert {
             Filter on the HealthCategory of the Alert Template to retrieve. Note that we search for an exact match
         .PARAMETER Severity
             Filter on the Severity of the Alert Template to retrieve. Note that we search for an exact match
+        .PARAMETER ServiceEvent
+            Filter on if the alert is a ServiceEvent or not.
         .PARAMETER AssignedTo
             Filter on the AssignedToUser of the Alert Template to retrieve. Note that we search for an exact match
         .PARAMETER State
@@ -78,6 +81,9 @@ function Get-OVGDResourceAlert {
         [Parameter(ParameterSetName="Query")]
         $AssignedTo,
         [Parameter(ParameterSetName="Query")]
+        [switch]
+        $ServiceEvent = $false,
+        [Parameter(ParameterSetName="Query")]
         $UserQuery,
         [Parameter(ParameterSetName="Default")]
         [Parameter(ParameterSetName="Query")]
@@ -117,6 +123,10 @@ function Get-OVGDResourceAlert {
 
         if($AssignedTo){
             $searchFilters += 'assignedToUser EQ "' + $AssignedTo + '"'
+        }
+
+        if($ServiceEvent){
+            $searchFilters += 'serviceEventSource EQ "' + $ServiceEvent + '"'
         }
 
         if($UserQuery){

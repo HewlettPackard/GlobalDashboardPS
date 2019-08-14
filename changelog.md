@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support paging (#8)
 - Scriptanalyzer test
 
+## [version 0.9.1] - 2019-08-14
+
+### Changed
+
+- Changed Get-OVGDResourceAlert so it supports queries for ServiceEvents
+
 ## [version 0.9.0] - 2019-04-25
 
 ### Added
