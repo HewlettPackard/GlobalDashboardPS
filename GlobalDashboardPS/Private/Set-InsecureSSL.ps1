@@ -2,7 +2,9 @@ function Set-InsecureSSL {
     [cmdletbinding(SupportsShouldProcess)]
     param()
 
-add-type @"
+    if (-not ("TrustAllCertsPolicy" -as [type])) {
+
+Add-Type @"
     using System.Net;
     using System.Security.Cryptography.X509Certificates;
     public class TrustAllCertsPolicy : ICertificatePolicy {
@@ -13,6 +15,7 @@ add-type @"
         }
     }
 "@
+    }
 
     if($PSCmdlet.ShouldProcess("ShouldProcess?")){
         [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
