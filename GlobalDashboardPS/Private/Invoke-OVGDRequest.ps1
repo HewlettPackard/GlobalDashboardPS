@@ -17,7 +17,14 @@ function Invoke-OVGDRequest {
     )
 
     BEGIN {
-        if($IgnoreSSL){
+        $SkipCertCheckParam = @{}
+        
+        if ($IgnoreSSL -and $PSVersionTable.PSEdition -eq 'Core'){
+            $SkipCertCheckParam = @{
+                'SkipCertificateCheck' = $true
+            }
+        }
+        elseif ($IgnoreSSL){
             Set-InsecureSSL
         }
     }
@@ -43,7 +50,7 @@ function Invoke-OVGDRequest {
         }
 
         Write-Verbose "$Method URI: $($uribuilder.uri)"
-        $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType $ContentType -ErrorVariable apiErr
+        $response = Invoke-RestMethod -Method $Method -Uri $URIBuilder.Uri -Headers $headers -Body $Body -ContentType $ContentType -ErrorVariable apiErr @SkipCertCheckParam
 
     }
     END {
